@@ -1,0 +1,28 @@
+# Change Log
+
+## 1.0 
+*	New documentation style
+*	New code folds style
+*	IE-proofed all existing code 
+*	Rewrote grid
+*	Renamed some modules
+*	Made menu module system more robust
+*	Created unit tests
+TODO
+*	mobile reset
+*	mobile translation
+
+## Wishlist
+*	mobile translation
+*	print translation
+*	module library
+*	color schemes library
+*	import font-stacks library and x-browser tests
+
+## Upcoming
+*	true nested grids
+*	sections
+*	copy
+*	thumb grids
+*	base type sheet
+*	base colors sheet

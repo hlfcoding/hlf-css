@@ -1,0 +1,331 @@
+<h1>CSS Framework</h1>
+
+<p><em>last modified</em>     <strong>July 2009</strong> <br />
+<em>document version</em>  <strong>0.1</strong> <br />
+<em>framework version</em> <strong>1.1</strong> <br />
+<em>author</em>            <strong>peng@pengxwang.com</strong>  </p>
+
+<p>View a formatted version of this file by copying it to here: <br />
+http://daringfireball.net/projects/markdown/dingus</p>
+
+<p><em>description</em></p>
+
+<p>This framework and document espouse my view on working with CSS.</p>
+
+<p>Since most browsers are not CSS3-compliant, advanced CSS selectors 
+and properties cannot be used. Instead we have to rely on better 
+programming practices. While CSS is actually markup, what it allows 
+through organization is powerful. That&#8217;s why this framework uses an 
+Object-Oriented approach, in the sense of property inheritance and 
+property visibility. This approach completes with progressive 
+enhancement, which allows consistency with less redundancy and a 
+cleaner organizational core.</p>
+
+<blockquote>
+  <p>&#8220;A CSS framework is a library that is meant to allow for easier, 
+  more standards-compliant styling of a webpage using the Cascading 
+  Style Sheets language. Just like programming and scripting language 
+  libraries, CSS frameworks package a number of ready-made options 
+  for designing and outlaying a webpage.&#8221; &#8212; <a href="http://en.wikipedia.org/wiki/CSS_framework">Wikipedia</a></p>
+</blockquote>
+
+<p><em>notes</em></p>
+
+<ul>
+<li>PREG regex patterns are used to describe certain variable values</li>
+</ul>
+
+<h2>Stylesheets</h2>
+
+<p>Filenames can differ depending on the asset loader&#8217;s parsing pattern.</p>
+
+<ul>
+<li><p>layout.css</p>
+
+<p>Empty sheet that loads media-type dependent, standalone CSS files. <br />
+It&#8217;s empty because <code>@import</code> statements must be at the top, so reset rules can&#8217;t be in it. <br />
+If needed, you can add global layout rulesets <em>below</em> the import statements, but beware of conflicts. <br />
+Each of the imported sheets has its own versions of the <strong>Sections</strong>. <br />
+This separation allows for <a href="http://www.alistapart.com/articles/progressiveenhancementwithcss/">progressive enhancement</a>.
+There is a compromise in speed, but it&#8217;s only 3 more files.  </p>
+
+<ul><li><p>layout_screen.css</p>
+<ul><li><p><em>reset</em></p>
+<p>basically <a href="http://meyerweb.com/eric/tools/css/reset/">Eric Meyer&#8217;s version</a>  </p></li>
+<li><p><em>extend > reset</em></p>
+
+<p>New, possibly site-specific reset rules. <br />
+You should add new rules, not 
+This section is outside of <code>unique</code> because you might use custom rules in several projects. <br />
+So this is also where you would import other custom rules for use.  </p></li>
+<li><p><em>grid</em></p>
+
+<p>Fluid layout container system inspired by <a href="http://developer.yahoo.com/yui/grids/">YUI Grids</a>, but uses <a href="http://www.positioniseverything.net/easyclearing.html">clearfix</a>  </p></li>
+<li><p><em>extend > grid</em></p>
+
+<p>New, possibly site-specific gridsets; or appending rulesets of base gridsets. <br />
+This section is outside of <code>unique</code> because you might use custom gridsets in several projects. <br />
+So this is also where you would import other custom gridsets for use.  </p></li>
+<li><p><em>modules</em></p>
+
+<p>Abstractions of common page elements, so all shared properties are included and protected. <br />
+Core also inspired by YUI Grids rules and OOP-CSS.  </p></li>
+<li><p><em>extend > modules</em></p>
+
+<p>New, possibly site-specific modules; or appending rulesets of base modules. <br />
+This section is outside of <code>unique</code> because you might use custom modules in several projects. <br />
+So this is also where you would import other custom modules for use.  </p></li>
+<li><p><em>unique</em></p>
+
+<p>Site-specific rulesets that refine the rulesets thus far. <br />
+Do the heavy, site-specific overriding here.  </p></li>
+</ul></li>
+<li><p>layout_print.css</p>
+
+<ul><li><em>reset</em> &#8212; <a href="http://code.google.com/p/hartija/">Hartija</a></li>
+<li><em>extend > reset</em> &#8212; unique print version</li>
+<li><em>grid</em> &#8212; framework&#8217;s print version</li>
+<li><em>extend > grid</em> &#8212; unique print version</li>
+<li><em>module</em> &#8212; framework&#8217;s print version</li>
+<li><em>extend > module</em> &#8212; unique print version</li></ul></li>
+<li><p>layout_mobile.css</p>
+
+<ul><li><em>reset</em> &#8212; framework&#8217;s mobile version</li>
+<li><em>extend > reset</em> &#8212; unique print version</li>
+<li><em>grid</em> &#8212; framework&#8217;s mobile version</li>
+<li><em>extend > grid</em> &#8212; unique print version</li>
+<li><em>module</em> &#8212; framework&#8217;s mobile version</li>
+<li><em>extend > module</em> &#8212; unique print version</li></ul></li>
+</ul>
+
+<p>Layout sheets are basically master sheets. They have unlimited property scope __as long as 
+the property is positioning-relevant.</p></li>
+<li><p>color.css</p></li>
+<li><p>type.css</p>
+
+<p>As part of progressive enhancement, separate global stylesheets for typography and color are kept. <br />
+Incidentally this also allows us to separate the often less changed and less developer-relevant 
+type and color rules.  </p>
+
+<p><code>color</code> only holds text, background, and border colors. <br />
+If a simple element&#8217;s size is not affected by <code>layout</code> (ex: <code>body</code>), other background properties are 
+allowed for it.  </p>
+
+<p><code>type</code> only holds layout-irrelevant font and text properties. </p>
+
+<p>Both files have starter sets of properties for rapid development. </p></li>
+<li><p>_1_lte_ie8.css</p></li>
+<li>_2_lte_ie7.css</li>
+<li><p>_3_lte_ie6.css</p>
+
+<p>Internet Explorer rendering fixes stack based on inheritance. <code>ie8</code> has cross-version fixes, <code>ie7</code> 
+fixes for itself and <code>ie6</code>, etc. <br />
+With a numerical prefix, other ie stylesheets can be added in order, assuming an assets loader is 
+being used. Also, each older version can now override the more recent, more global version. <br />
+Following progressive enhancement, layout media sheets are loaded beforehand as link tags. <br />
+Use the inline hacks <code>*property: value;</code> and <code>_property: value;</code> if a section can be maintained better or more 
+easily.</p></li>
+</ul>
+
+<h2>Style Guide</h2>
+
+<p>Consistent style is not a requirement but a suggestion. </p>
+
+<h3>Section Folding</h3>
+
+<p>To help separate sections and create a truly modular document structure, sections are marked by 
+<code>/** section comment */</code> &#8594; <code>/* ^ section comment **/</code>&#8212;where <code>section comment</code> means 
+<code>(action|) + inheritance trail + ( ! notice|)</code>&#8212;so each section can be folded in the IDEs: 
+<a href="http://macromates.com/">Textmate</a>, <a href="http://e-texteditor.com">E</a>.  This is a hack so it doesn&#8217;t work 
+in all IDEs. For example, this structure is meant to be nested together:</p>
+
+<pre><code>/** grid  */
+/** grid &gt; cols */
+/** grid &gt; cols &gt; core ! protected */
+
+.gd .inG .col {
+    float: left;
+}
+
+/* ^ grid &gt; cols &gt; core ! protected **/    
+/** grid &gt; cols &gt; widths */
+
+/* etc. */
+
+/* ^ grid &gt; cols &gt; widths **/
+/* ^ grid &gt; cols **/    
+/* ^ grid  **/
+/** extend grid */
+
+/* etc. */
+
+/* ^ extend grid **/
+</code></pre>
+
+<p>This replaces using empty line breaks to denote sections, or a diverse range of non-fold-inducing 
+section headers. While nesting sections is potentially infinite, do so only when necessary. 
+Sometimes an <code>/* inline */</code> comment is enough. <br />
+Hopefully the example shows how useful the end comment line can be. Notice the inheritance trail 
+also acts as a translator of the usually terse selector values, so we get simplicity and clarity.  </p>
+
+<h3>Indentation, Comments, Speed</h3>
+
+<p>The framework tries to minize blank lines to limit file size, without sacrificing clarity. 
+It&#8217;s also why the original block comments are all incorporated into this document. 
+If files are too many / big, you can try using a <a href="http://code.google.com/p/minify/">compressor</a> 
+to serve the sheets. Duplicating rulesets for organization is discouraged unless it&#8217;s for reuse. <br />
+The only documentation missing in this document are inline comments within various implementations, 
+labels for default implementations, translations of values, sub-subsection dividers, etc. <br />
+Tabs (soft) are important and used when logical.  </p>
+
+<h3>Naming conventions</h3>
+
+<p>For reusable code, the general pattern for naming selectors is to be as simple as possible, 
+but still human. This is why the framework itself does not use a prefix like <code>yui-</code>. <br />
+It simply becomes your framework upon first use. There are guidelines, not rules. <br />
+The opposite is suggested for naming unique selectors. Be descriptive. <br />
+The general rule of thumb follow by the framework is to define by <em>both</em> content and visuals.</p>
+
+<h4>Selectors</h4>
+
+<p>For framework elements, there are core and sub classes. Cores are lower-case, non-camelized, 
+2-3 letter logical abbreviations like <code>.gd</code> or <code>.col</code> or <code>.doc</code>. Subs are camelized, with the 
+first letter from the respective core, like <code>.mnVeryLongName</code> or <code>.g2A</code> or <code>.g2AB</code> for a sub-sub 
+class of two-column uneven grid with special bleed. For extending modules, the abbreviation can 
+be used. There are also utility cores like fixes (<code>fix</code>), inner (<code>in</code>), outer (<code>ou</code>), child (<code>ch</code>), 
+parent (<code>pa</code>), sibling(<code>sib</code>), descendant (<code>des</code>) and ancestor (<code>anc</code>), before (<code>bf</code>) and after (<code>af</code>). Use them 
+<em>only as needed</em>. Example: <code>.paFix .fixC .ch1 a.des1</code>. <br />
+While selector queries are generally kept short, unneeded global namespace pollution is kept in mind.</p>
+
+<h2>Descriptions and Usage</h2>
+
+<h3>Grid</h3>
+
+<p>Generates gridsets using % column widths and em wrapper widths with the base font size of 16px. <br />
+IE7 and below can overround 1px for each col, so with the fixes the default gridsets, 
+nesting included, work until <em>grid</em> width is less than 600px.</p>
+
+<ul>
+<li><p>wrapper (<code>.doc</code>)</p>
+
+<pre><code>It's easier to have the pixel number be base 5, 10, 2, 4, 6, 8, 12, 16
+</code></pre></li>
+<li><p>grid (<code>.gd</code>)</p></li>
+<li><p>inner-grid (<code>.inG</code>)</p>
+
+<pre><code>The style for most block elements in the framework is to have an inner block element. 
+This is a pattern I use often to have `width` and `padding` not affect each other.  
+To hide grid borders use `border-color: transparent;` instead of `border-width: 0;`
+</code></pre></li>
+<li><p>cols (<code>.col</code>)</p>
+
+<pre><code>Uses padding for the gutter to avoid IE double margin bug
+</code></pre>
+
+<ul><li><p>inner-col (<code>.inC</code>)</p>
+<p>To avoid a mis-aligned right page edge in IE, avoid showing the shape of this.</p></li>
+<li><p>colsets (<code>.g[0-9][A-Z]</code> > <code>.c[0-9]</code>)</p>
+
+<p>Some of the larger colsets are shortcuts for nested grids. <br />
+You can get the same thing through nesting, but maybe more bugs. <br />
+The percentages are set so all gridsets align.</p></li>
+<li><p>formula for calculating col-widths</p>
+
+<p>(100% - [ncols - 1] * 1.99%) / [ncols]
+for IE: - 1.125%</p></li>
+</ul></li>
+</ul>
+
+<h3>Module</h3>
+
+<p>Modules are divide into sections that contain different implementations. Most 
+modules are stand-alone and do not require another class.</p>
+
+<ul>
+<li>boxes (<code>.box</code>)</li>
+<li>menus (<code>.mn</code>) - standard vertical linked list</li>
+</ul>
+
+<h3>Misc.</h3>
+
+<ul>
+<li>clearfix hack (<code>.fixC</code>)</li>
+<li>w3c clear hack (<code>.clearer</code>)</li>
+</ul>
+
+<h2>Implementation</h2>
+
+<h3>General Rules</h3>
+
+<ul>
+<li><strong>Only modify lines and sections not commented as <code>! protected</code>. <br />
+And put the new properties in a new ruleset, to keep code reusable.</strong></li>
+</ul>
+
+<h3>Unique Section</h3>
+
+<p>Only for elements with ids. </p>
+
+<blockquote>
+  <p>Example: <code>#hd</code>, <code>#bd</code>, <code>#ft</code> <br />
+  These are irregular, one-instance wrapping containers  </p>
+</blockquote>
+
+<p>Use this section (and ids) sparingly, instead extend modules and grid in the sections below.</p>
+
+<h3>Extending Gridsets and Modules</h3>
+
+<p>Keep in mind to balance adding and omitting properties, from being too straightforward or too abstract.</p>
+
+<p>Extending a gridset simply means giving it new widths. <br />
+You may also want to test it with other gridsets for nesting compatibility.</p>
+
+<p>Extending a module means giving an element multiple classes.</p>
+
+<blockquote>
+  <p><code>class="box box_FB"</code> &#8592; where <code>FB</code> is the acronym of this project (Foo Bar Video Group Ltd.).</p>
+</blockquote>
+
+<p>For more control, you can add a unique instance or use more selectors.</p>
+
+<blockquote>
+  <p><code>#myBox</code> or <code>#bd .c1 .box_FB</code></p>
+</blockquote>
+
+<p>Use your best judgment on where to assign the class. Suggested: <code>.inC</code>. <br />
+But just try to avoid situations like:</p>
+
+<blockquote>
+  <p><code>class="box box_FB gd gB g2A"</code></p>
+</blockquote>
+
+<p>And in such situations make sure the base &#8594; custom order is clear.</p>
+
+<p>Avoid using actual html tags in your selectors like <code>ul.mnPlus li a</code> if you just want to 
+be clear. Doing so limits the power of the module, so don&#8217;t include the html tag unless 
+the it&#8217;s by design.</p>
+
+<h2>CSS Reference</h2>
+
+<p>To add more weight to certain rulesets, use the #html weight.</p>
+
+<blockquote>
+  <p><code>#html #bd .c1 .box_FB</code></p>
+</blockquote>
+
+<p>Since the child selector syntax <code>&gt;</code> is not feasible to use, understand:</p>
+
+<blockquote>
+  <p><code>.a .b</code> as applies to <code>.a .b .b</code> &#8212; so add a new reset ruleset for the second selector.</p>
+</blockquote>
+
+<p>IE debugging reference: </p>
+
+<ul>
+<li><a href="">http://www.positioniseverything.net/explorer.html</a></li>
+<li><a href="">http://www.satzansatz.de/cssd/onhavinglayout.html</a></li>
+<li><a href="">http://johncrenshaw.net/blog/ie-list-item-margin-hack</a></li>
+<li><a href="">http://www.ojctech.com/content/css-jumping-columns-and-ies-percentage-rounding-algorithm</a></li>
+</ul>
+
+

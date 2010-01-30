@@ -1,0 +1,1 @@
+/** modules > rows */.row {    display: block;    padding-top: 1em;    padding-bottom: 0;}.row .rKey, .row .rVal {    vertical-align: middle;}.row .rKey {    display: -moz-inline-stack; display: inline-block;}/* compatibility */.inC .row {    padding-left: 0;    padding-right: 0;}/* ^ modules > rows **/

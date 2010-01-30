@@ -1,0 +1,10 @@
+/** fix > give has_layout */
+
+.inC,
+.inG, .fixC,
+.has_layout
+{
+    zoom: 1;
+}
+
+/* ^ fix > give has_layout **/

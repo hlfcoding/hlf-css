@@ -1,0 +1,477 @@
+/**
+ * The Screen Layout Stylesheet
+ * @see         readme.txt
+ * @base        CSS Framework 1.1
+ * @author      peng@pengxwang.com
+**/
+
+/** reset */
+/* main block */
+html, body, div, object, iframe,
+/* heading */
+h1, h2, h3, h4, h5, h6, 
+/* sub block */ 
+p, blockquote, pre, cite, code, 
+/* inline */ 
+a, span, abbr, acronym, address, big, del, dfn, em, img, ins, 
+kbd, q, samp, small, strike, strong, sub, sup, tt, var,
+/* lists */ 
+dl, dt, dd, ol, ul, li, 
+/* forms */
+fieldset, form, label, legend,
+/* tables */
+table, caption, tbody, tfoot, thead, tr, th, td { /* ! protected */
+    outline: 0;
+    margin: 0;
+    padding: 0;	
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+/*:focus { */
+a:hover, a:active {
+    /* accessibility fix */
+    outline: 0;
+}
+body {
+    line-height: 1;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+table { 
+    border-collapse: separate; 
+    border-spacing: 0; 
+}
+/* table */
+th, 
+/* heading */
+h1, h2, h3, h4, h5, h6, 
+/* inline */
+b, strong, address, caption, cite, code, dfn, em, strong, var, i  { 
+    font-style: normal; 
+    font-weight: normal; 
+}
+caption, th, td { 
+    text-align: left; 
+    vertical-align: middle; 
+}
+ul, ol, li { 
+    list-style: none; 
+}
+
+/* ^ reset **/
+/** extend reset */
+
+html, body, div, object, iframe,
+h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, cite, code, 
+a, span, abbr, acronym, address, big, del, dfn, em, img, ins, 
+kbd, q, samp, small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    /* quick border */
+    border-width: 0; 
+    border-style: solid;
+}
+hr {
+    display: none; 
+}
+body {
+    cursor: default;
+}
+
+/* ^ extend reset **/
+/** util */
+
+.replaced {
+    display: block; 
+    text-indent: -9999em;
+    overflow: hidden;
+}
+
+#html .empty {
+    padding: 0;
+    margin: 0;
+}
+
+/* ^ util **/
+/** extend util */
+
+a.replaced {
+    border-bottom-width: 0;
+}
+
+/* ^ extend util **/
+/** grid ! basic package */
+/** grid > wrapper */
+
+body {
+    text-align: center;
+}
+.doc {
+    margin: auto;
+    text-align: left;
+    /* default width is fluid */
+    margin-left: auto;
+    margin-right: auto;
+}
+.dA, .dB, .dC { /* fixed-width */
+    margin-left: auto;
+    margin-right: auto;
+}
+.dA { width: 50em; /* web 1.0 - 720px - 240 x 3 */ }
+.dB { width: 60em; /* web 2.0 - 960px - 240 x 4 */ }
+.dC { width: 75em; /* web 3.0 - 1200px - 240 x 5 */ }
+
+.dE1, .dE2, .dE3 { /* elastic */
+    width: auto;
+}
+.dE1 { 
+    margin-left: 40px; 
+    margin-right: 40px; 
+    min-width: 50em;
+}
+.dE2 { 
+    margin-left: 120px; 
+    margin-right: 120px; 
+    min-width: 60em;
+}
+.dE3 { 
+    margin-left: 360px; 
+    margin-right: 360px; 
+    min-width: 70em;
+}
+
+/* ^ grid > wrapper **/
+/** grid > core ! protected */
+
+.gd {
+    display: block;
+}
+.mnH:after,
+.fixC:after,
+.gd .inG:after { /* clearfix */
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+}
+/* another way */
+.clearer { 
+    clear: both;
+    line-height: 1px;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+/* floats */
+.inG .left, .inG .right {
+    display: -moz-inline-stack; display: inline-block;
+}
+/* ^ grid > core ! protected **/
+/** grid > inner */
+
+.in {
+    margin: 0; /* ! protected */
+}
+.gd .in { 
+    display: block;
+    padding: 1em;
+}
+.gd .in .in { 
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+.gd .inG {
+    border-width: 1px; 
+}
+
+/* ^ grid > inner **/
+/** grid > cols */
+/** grid > cols > core */
+
+.inG .colR, .inG .col {
+/*    display: -moz-inline-stack;*/
+/*    display: inline-block;*/
+}
+.inG .col {
+    float: left;
+}
+.inG .colR {
+    float: right;
+}
+/* gutter */
+.gd .col { /* note: no margins with floats */
+    padding-left: 1.99%;
+    padding-right: 0; /* ! protected */
+}
+.inGB .col, /* bleed */
+.gd .c1 { /* exception */
+    padding-left: 0; /* ! protected */
+}
+
+/* ^ grid > cols > core **/
+/** grid > cols > inner */
+
+.gd .inC {
+    padding: 1em 1.5em;
+    border-left-width: 1px; 
+}
+.gd .inCB { /* bleed */
+    padding: 0;
+}
+.gd .c1 .inC { /* exception */
+    border-left: 0 none;
+}
+/* nesting */
+.gd .inCB .inC,
+.gd .inC .inC { 
+    padding: 0;
+    border-left-width: 0;
+}
+.gd .inG .inG {
+    border-width: 0;
+}
+
+/* ^ grid > cols > inner **/
+/** grid > cols > widths ! IE too */
+/** grid > cols > widths > 2-cols */
+
+/* 100 - 2 */
+
+.gd .gd .g2A .c1, .gd .gd .g2B .c2, /* nesting */
+.gd .g2A .c1, .gd .g2B .c2, /* nesting */
+.g2A .c1, .g2B .c2 { width: 33.0%; *width: 32.875%; }
+
+.gd .gd .g2A .c2, .gd .gd .g2B .c1, /* nesting */
+.gd .g2A .c2, .gd .g2B .c1, /* nesting */
+.g2A .c2, .g2B .c1 { width: 65.0%; *width: 64.875%; }
+
+.gd .gd .g2C .c1, .gd .gd .g2D .c2, /* nesting */
+.gd .g2C .c1, .gd .g2D .c2, /* nesting */
+.g2C .c1, .g2D .c2 { width: 23.5%; *width: 23.375%; }
+
+.gd .gd .g2C .c2, .gd .gd .g2D .c1, /* nesting */
+.gd .g2C .c2, .gd .g2D .c1, /* nesting */
+.g2C .c2, .g2D .c1 { width: 74.5%; *width: 74.375%; }
+
+.gd .gd .g2Z .col, /* nesting */
+.gd .g2Z .col, /* nesting */
+.g2Z .col { width: 49.0%; *width: 48.875%; }
+
+/* ^ grid > cols > widths > 2-cols **/
+/** grid > cols > widths > 3-cols */
+
+/* 100 - 4 */
+.g3A .c1, .g3B .c1, .g3C .c3,           
+.g3A .c2, .g3B .c3, .g3C .c2 { width: 23.5%; *width: 23.375%}
+.g3A .c3, .g3B .c2, .g3C .c1 { width: 49.0%; *width: 48.875%}
+.gd .g3Z col, 
+.g3Z .col { width: 32.0%; *width: 31.875%; }
+
+/* ^ grid > cols > widths > 3-cols **/
+/** grid > cols > widths > 4-cols */
+
+/* 100 - 6 */
+.gd .g4Z col, 
+.g4Z .col { width: 23.5%; *width: 23.375%; }
+
+/* ^ grid > cols > widths > 4-cols **/
+/* ^ grid > cols > widths **/
+/* ^ grid > cols **/
+/* ^ grid ! basic package **/
+/** extend grid */
+/** grid > wrapper */
+
+/* ^ grid > wrapper **/
+/** grid > core */
+
+.gd .inG {
+    border-width: 0;
+}
+
+/* ^ grid > core **/
+/** grid > cols > bleed */
+
+.gd .g4Z .inGB col, 
+.g4Z .inGB .col { width: 24.9925%; *width: 24.8575%; }
+
+/* ^ grid > bleeding column **/
+/** grid > cols > widths > 2-cols no gutter */
+
+.g2B .inGB .c1 {
+    width: 66.99%; /* 65 + 1.99 */
+    *width: 66.865%;
+}
+
+.g2D .inGB .c1 {
+    width: 75.49%; /* 74.5 + .99 */
+    *width: 75.365%;
+}
+.g2D .inGB .c2 {
+    width: 24.5%; /* 23.5 + 1 */
+    *width: 24.375%;
+}
+
+/* ^ grid > cols > widths > 2-cols no gutter **/
+/** grid > cols > widths > 3-cols no gutter */
+
+.gd .g3Z .inGB col, 
+.g3Z .inGB .col { width: 33.32%; *width: 33.195%; }
+
+/* ^ grid > cols > widths > 3-cols no gutter **/
+
+.gd .gd .inC {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.gd .inC { 
+    border: 0; 
+    padding-left: 0;
+}
+.c1 .inC {
+    padding-left: 1.5em;
+}
+
+.gd .gd .g5Z .col, 
+.g5Z .col { width: 18.4%; *width: 18.275%; }
+
+.gd .gd .g6Z .col, 
+.g6Z .col { width: 15%; *width: 14.875%; }
+
+.gd .gd .g7Z .col,
+.g7Z .col { width: 12.58%; *width: 12.455%; }
+
+/** grid > nesting */
+
+.col .gd .inC { padding-left: 0; }
+.c1 .gd .inC { padding-left: 1.5em; /* #ref */ }
+
+/* ^ grid > nesting **/
+/* ^ extend grid **/
+/** modules ! basic package */
+/** modules > boxes */
+/** modules > boxes > core */
+
+.box {
+    display: block;
+}
+.box .hd, .box .bd, .box .ft {
+    position: relative;
+    padding: 1em;
+}
+.box .hd, .box .bd {
+    padding-bottom: 0;
+}
+
+/* ^ modules > boxes > core **/
+/* ^ modules > boxes **/
+/** modules > menus */
+/** modules > menus > core ! protected */
+
+.mn {
+    display: block;
+}
+.mn a {
+    padding: .5em 1em;
+    border-style: solid;
+    border-width: 1px;
+    line-height: 1.33em;
+    text-decoration: none;
+}
+/* submenu guide */
+.mn2 {}
+.mn3 {}
+.mn4 {}
+
+/* ^ modules > menu > core ! protected **/
+/** modules > menu > vertical */
+
+.mnV li {
+    float: none;
+    clear: both;
+}
+.mnV a {
+    display: block;
+    border-top-width: 0;
+}
+.mnV li.chL a { /* exception */
+    border-bottom-width: 0;
+}
+#html .mnV li.aftN a, /* nesting */
+.mnV li.ch1 a { /* exception */
+    border-top-width: 1px;
+}
+.mnV li.ch1 li a { /* reset */
+    border-top-width: 0;
+}
+.mnV li li {
+    padding-left: 1em;
+}
+
+/* ^ modules > menu > vertical **/
+/** modules > menu > horizontal ! requires .cFix */
+
+.mnH li {
+    float: left;
+}
+.mnH a {
+    display: block;
+    border-left-width: 0;
+}
+.mnH li.ch1 a { /* exception */
+    border-left-width: 1px;
+}
+
+/* ^ modules > menu > horizontal ! requires .inG **/
+/* ^ modules > menu **/
+/* ^ modules ! basic package **/
+/** extend modules */
+
+
+
+/* ^ extend modules **/
+
+/* -------------------------------------------------- */
+/**        NON-REUSABLE, CUSTOM CODE AFTER THIS POINT
+----------------------------------------------------- */
+/** unique */
+
+#hd {
+    
+}
+#bd {
+    
+}
+#ft {
+    
+}
+
+/* ^ unique **/
+/** unique > extend grid */
+
+
+
+/* ^ unique > extend grid **/
+/** unique > extend modules */
+
+
+
+/* ^ unique > extend modules **/
+/* ^ NON-REUSABLE CODE **/

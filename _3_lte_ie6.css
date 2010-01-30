@@ -1,0 +1,34 @@
+/** fix > give hasLayout */
+
+.mnV li,
+.mn a,
+.fixDoHL {
+    zoom: 1;
+}
+
+/* fix > give has_layout **/
+/** fix > grid > core ! important */
+
+/* IE-Mac fix - may or may not need it */
+.mnH, .inG, .fixC {
+    display: inline-block; 
+    height: 1%; 
+    display: block; 
+}
+
+/* ^ fix > grid > core ! important **/
+/** fix > list child is block */
+
+.mnV a,
+.fixLCB {
+    display: inline;
+    display: block;
+}
+
+/* ^ fix > list child is block **/
+
+/** debugger */
+
+.dev { border: 1px solid red; }
+
+/* ^ debugger **/
