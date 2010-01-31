@@ -1,14 +1,3 @@
-See wiki for details
-
-Packages of CSS core, modules, and patterns
-
-Flavors (other branches or repos) :
-    Rich
-    Light (soon) - no elastic support
-    Far (tba) - emphasis on mobile screens
-    Shiny (soon) - css3, no ie6/ie7 support
-    Strong (tba) - programmatic
-
 # CSS Framework
 
 _last modified_     __July 2009__  
@@ -16,8 +5,13 @@ _document version_  __0.1__
 _framework version_ __1.1__  
 _author_            __peng@pengxwang.com__  
 
-View a formatted version of this file by copying it to here:  
-http://daringfireball.net/projects/markdown/dingus
+_other flavors_
+
+*   Rich
+*   Light (soon) - no elastic support
+*   Far (tba) - emphasis on mobile screens
+*   Shiny (soon) - css3, no ie6/ie7 support
+*   Strong (tba) - programmatic
 
 _description_
 
