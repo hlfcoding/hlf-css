@@ -1,17 +1,9 @@
 # CSS Framework
 
 _last modified_     __July 2009__  
-_document version_  __0.1__  
-_framework version_ __1.1__  
+_document version_  __0.2__  
+_framework version_ __2.0__  
 _author_            __peng@pengxwang.com__  
-
-_other flavors_
-
-*   Rich
-*   Light (soon) - no elastic support
-*   Far (tba) - emphasis on mobile screens
-*   Shiny (soon) - css3, no ie6/ie7 support
-*   Strong (tba) - programmatic
 
 _description_
 
@@ -34,7 +26,7 @@ for designing and outlaying a webpage." -- [Wikipedia](http://en.wikipedia.org/w
 
 _notes_
 
-*   PREG regex patterns are used to describe certain variable values
+*   Regex patterns are used to describe certain variable values
 
 
 ## Stylesheets
