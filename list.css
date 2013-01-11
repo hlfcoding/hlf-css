@@ -1,0 +1,5 @@
+header {padding:40px 0; border-bottom:1px dotted #000; font-size:30px; font-weight:bold;}
+.list {margin:10px 50px;}
+.list nav a {display:block; padding:10px 10px 14px; border-bottom:1px dotted #ccc;}
+.list nav a:hover {text-decoration:none; background:#f5f5ff;}
+.list nav a:last-child {border-bottom:0;}
