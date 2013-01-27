@@ -95,31 +95,20 @@ $b-1: rgba(0,0,0, 0.1);
   }
 }
 
-// The base box shadow mixin. It sort of supports multiple box-shadows by having
-// an `$additional` string that gets appended to the end. The box shadow interface
-// is different from the CSS3 syntax. The size value is optional, but in the origin
-// it's 4th argument (before the color), but can be omitted. This is hard to do, so
-// here it's the 5th argument.
-@mixin box-shadow ($x:0, $y:0, $blur:0, $color:transparent, $size:0, $inset:false, $additional:false) {
-  @if $x == none {
-    -webkit-box-shadow: none;
-            box-shadow: none;
-  } @else {
-    @if $inset != false { $inset: 'inset'; } @else { $inset: ''; }
-    @if $additional != false { $additional: ', '+$additional; } @else { $additional: ''; }
-    -webkit-box-shadow: #{$inset} $x $y $blur $size $color#{$additional};  // Saf3.0+, Chrome
-            box-shadow: #{$inset} $x $y $blur $size $color#{$additional};  // Opera 10.5, IE9, FF4+, Chrome 10+
-  }
+// The base box shadow mixin, using variable arguments.
+@mixin box-shadow ($shadows...) {
+  -webkit-box-shadow: $shadows;  // Saf3.0+, Chrome
+          box-shadow: $shadows;  // Opera 10.5, IE9, FF4+, Chrome 10+
 }
 // A shorthand for doing a single "inner shadow." A common use is to set the blur
 // to `0` and the size to `1px` for an "inner border," which is great for bevels.
 @mixin single-inset ($x, $y, $blur, $color, $size:0) {
-  @include box-shadow($x, $y, $blur, $color, $size, true);
+  @include box-shadow(inset $x $y $blur $size $color);
 }
 // A shorthand for doing a single "outer shadow." A common use is to set the blur
 // to `0` and the size to `1px` for an "outer border," which is great for bevels.
 @mixin single-shadow ($x, $y, $blur, $color, $size:0) {
-  @include box-shadow($x, $y, $blur, $color, $size);
+  @include box-shadow($x $y $blur $size $color);
 }
 
 // A preset using box-shadow that by default has no offset, where two box shadows are applied
@@ -127,7 +116,8 @@ $b-1: rgba(0,0,0, 0.1);
 // appearance of a bevel. You can provide inverted colors for the "contour" look,
 // where it's bumpy, not caved in.
 @mixin simple-bevel ($shade, $light, $shade-blur:1px, $light-blur:0, $shade-size:0, $light-size:1px, $shade-x:0, $shade-y:0) {
-  @include box-shadow($shade-x, $shade-y, $shade-blur, $shade, $shade-size, true, '0 0 #{$light-blur} #{$light-size} #{$light}');
+  @include box-shadow(inset $shade-x $shade-y $shade-blur $shade-size $shade,
+                      0 0 $light-blur $light-size $light);
 }
 
 // Beware that this is expensive, since it creates 4 box-shadows. By default it
@@ -140,20 +130,22 @@ $b-1: rgba(0,0,0, 0.1);
                          $shift-1:3px, $shift-2:3px,
                          $shade-1:$b-3, $shade-2:$b-5, $shade-3:$b-8, $shade-4:$b-2)
 {
-  @include box-shadow(0, 0, $size-1, $shade-1, 0, true,
-                     '0 0 #{$size-2} #{$shade-2}, '+
-                     '0 #{$shift-1} #{$size-3} #{$shade-3}, '+
-                     '0 #{$shift-2} 0 #{$shade-4}');
+  @include box-shadow(inset 0 0 $size-1 0 $shade-1, 0 0 $size-2 $shade-2,
+                      0 $shift-1 $size-3 $shade-3, 0 $shift-2 0 $shade-4);
+}
+
+@mixin linear-gradient ($args...) {
+  background-image: -webkit-linear-gradient($args); // Chrome 10+, Saf5.1+
+  background-image:    -moz-linear-gradient($args); // FF3.6
+  background-image:     -ms-linear-gradient($args); // IE10
+  background-image:      -o-linear-gradient($args); // Opera 11.10+
+  background-image:         linear-gradient($args);
 }
 
 // Draws a generic, vertical (top-to-bottom by default) gradient.
 @mixin simple-gradient ($light, $shade, $light-pos:0%, $shade-pos:100%) {
   background-color: $light;
-  background-image: -webkit-linear-gradient(top, $light $light-pos, $shade $shade-pos); // Chrome 10+, Saf5.1+
-  background-image:    -moz-linear-gradient(top, $light $light-pos, $shade $shade-pos); // FF3.6
-  background-image:     -ms-linear-gradient(top, $light $light-pos, $shade $shade-pos); // IE10
-  background-image:      -o-linear-gradient(top, $light $light-pos, $shade $shade-pos); // Opera 11.10+
-  background-image:         linear-gradient(top, $light $light-pos, $shade $shade-pos);
+  @include linear-gradient(top, $light $light-pos, $shade $shade-pos);
 }
 
 // Draws a more custom gradient that supports up to three colors. This is useful
@@ -162,11 +154,7 @@ $b-1: rgba(0,0,0, 0.1);
                              $pos:top, $end-clr:$start-clr)
 {
   background-color: $stop-clr;
-  background-image: -webkit-linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
-  background-image:    -moz-linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
-  background-image:     -ms-linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
-  background-image:      -o-linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
-  background-image:         linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
+  @include linear-gradient($pos, $start-clr, $stop-clr $stop-pos, $end-clr);
 }
 
 ///* END      CSS3 Box **/

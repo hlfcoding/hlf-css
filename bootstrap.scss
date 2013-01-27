@@ -8,8 +8,8 @@
 @import "mixins.scss";
 @import "h5bp.scss";
 
+$_context: master !default;
 // Required id somewhere in the dom root.
-$_context: if(not $_context, master, $_context);
 $_weight: '#html';
 
 @if $_context == layout_screen or $_context == layout_mobile {
