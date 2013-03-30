@@ -249,7 +249,7 @@ $clear: rgba(0,0,0, 0);
 // should be comma-separated. The properties should be passed in in list format:
 // `@include transition([prop] [prop] [prop]);`. Normally, we avoid the long form
 // b/c it increases file size.
-@mixin transition ($props, $time:0.3s, $easing:ease-in-out) {
+@mixin transition ($props:all, $time:0.3s, $easing:ease-in-out) {
   @if length($props) > 1 {
     $str: '';
     $i: 0;
@@ -282,6 +282,9 @@ $clear: rgba(0,0,0, 0);
        -o-transition: $props $time $easing;  // Opera 10.5+
           transition: $props $time $easing;
   }
+}
+%default-transition {
+  @include transition;
 }
 // A shorthand for adding an on-hover animation.
 @mixin anim-onhover ($prop, $value-1, $value-2, $target:'&') {
