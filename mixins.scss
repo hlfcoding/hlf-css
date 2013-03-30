@@ -37,6 +37,8 @@ $b-3: rgba(0,0,0, 0.3);
 $b-2: rgba(0,0,0, 0.2);
 $b-1: rgba(0,0,0, 0.1);
 
+$clear: rgba(0,0,0, 0);
+
 ///* END      Constants **/
 ///** START   CSS3 Box */
 
@@ -165,19 +167,35 @@ $b-1: rgba(0,0,0, 0.1);
 ///* END      CSS3 Box **/
 ///** START   CSS3 Text */
 
-// Draws an inset around the text. The default is for dark-colored text on a
-// non-white background. If needed you can specify two different highlights to make
-// the inset less harsh. The shift is for how "deep" the inset should be.
-@mixin text-inset ($light-1:$w-5, $light-2:$w-5, $shift:-1px) {
-  text-shadow: $shift $shift 0 $light-1,
-               $shift*-1 $shift*-1 0 $light-2,
-               0 $shift 0 $light-1,
-               0 $shift*-1 0 $light-2;
-}
-// A shorthand for inverting the default `text-inset`. Use with light-colored text
-// on a non-black background.
-@mixin text-inset-inverted ($shade-1:#000, $shade-2:#000, $shift:-1px) {
-  @include text-inset($shade-1, $shade-2, $shift);
+// Draws an inset around the text.
+// TODO: Document.
+@mixin text-inset ($outset-clr:$w-5, $inset-clr:$b-5, $text-clr:#ddd, $offset:3px, $dir:vertical, $offset-dir:1) {
+  @if $dir == vertical {
+    text-shadow: 0 ($offset-dir * 1px) 0 $outset-clr;
+  } @else if $dir == horizontal {
+    text-shadow: ($offset-dir * 1px) 0 0 $outset-clr;
+  }
+  @if $inset-clr != $clear {
+    >span[data-title] {
+      position: relative;
+      color: $inset-clr;
+      top: 2px - $offset;
+      &::before {
+        content: attr(data-title);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0; left: 0;
+        color: $text-clr;
+        text-shadow: none;
+        @if $dir == vertical {
+          top: $offset;
+        } @else if $dir == horizontal {
+          left: $offset;
+        }
+      }
+    }
+  }
 }
 
 // Mostly derived from HTML5 Boilerplate. Useful mainly for disabling /
