@@ -5,8 +5,9 @@
 // Include this at the start of your stylesheet. Define a `_context` before then
 // to determine what gets output.
 
-@import "mixins.scss";
-@import "boilerplate.scss";
+@import 'hlf.mixins';
+@import 'hlf.boilerplate-base';
+@import 'normalize';
 
 $_context: master !default;
 // Required id somewhere in the dom root.
@@ -17,6 +18,6 @@ $_root: '..';
 
   .inline-block { display: -moz-inline-stack; display: inline-block; }
   #{$_weight} .inline { display: inline; }
-  .hide { display: none; }
+  .loosely-hidden { display: none; }
 
 }
