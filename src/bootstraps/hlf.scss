@@ -1,0 +1,31 @@
+//
+// The Bootstrap
+// =============
+//
+// Include this at the start of your stylesheet. Define a `_context` before then
+// to determine what gets output.
+
+@import '../imports/grayscale-colors';
+@import '../imports/css-helpers';
+@import '../imports/chrome-helpers';
+@import '../skins/hlf';
+
+$_context: master !default;
+$_root: '..';
+// Required id somewhere in the dom root.
+$_weight: '#html';
+
+// Start output.
+
+@import '../../lib/modified/html5-boilerplate/base';
+@import '../../lib/modified/normalize';
+
+/* ==========================================================================
+   Bootstrap additions
+   ========================================================================== */
+
+@if $_context == master {
+  .inline-block { display: inline-block; }
+  #{$_weight} .inline { display: inline; }
+  .loosely-hidden { display: none; }
+}

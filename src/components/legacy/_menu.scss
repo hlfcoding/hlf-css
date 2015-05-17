@@ -1,0 +1,53 @@
+//
+// Menu Module
+// ===========
+//
+// Reserved menu selectors:
+//
+// - `.mn`
+// - `.mn-h`
+// - `.mn-v`
+
+.mn {
+  display: block;
+  list-style-image: none;
+  list-style: none;
+  margin-left: 0;
+  a {
+    border: { style: solid; width: 1px; }
+    line-height: 1.33em;
+    padding: .5em 1em;
+    text-decoration: none;
+  }
+}
+
+.mn-h {
+  @extend .mn;
+  @extend .fix-c;
+  li {
+    float: left;
+    &:first-child a { border-left-width: 1px; }
+  }
+  a {
+    border-left-width: 0;
+    display: block;
+  }
+}
+
+
+.mn-v {
+  @extend .mn;
+  li {
+    li { padding-left: 1em; }
+    // &.aft-n a { border-top-width: 1px }
+    &:first-child {
+      a { border-top-width: 1px; }
+      li a { border-top-width: 0; }
+    }
+    &:last-child a { border-bottom-width: 0; }
+  }
+  a {
+    display: block;
+    border-top-width: 0;
+  }
+}

@@ -1,0 +1,166 @@
+//
+// CSS Helpers
+// ===========
+// Vendor prefixing not included. You're encouraged to use an auto-prefixing solution.
+
+// Border Radius
+// -------------
+
+$hlf-default-border-radius: 5px !default;
+
+@mixin border-radius($radius: $hlf-default-border-radius, $clip: border-box) {
+  // TODO: Check if still necessary:
+  // We interpolate `$radius` for cases where it's not's just one value, but [top]
+  // [right] [bottom] [left].
+  border-radius: #{$radius};
+  background-clip: $clip;
+}
+// To get round corners on tables, the border-radius values should be added to
+// the appropriate cells. The custom selectors makes it so this can be applied
+// to a variety of tables.
+@mixin border-radius-table($radius: $hlf-default-border-radius, $clip: border,
+                           $head-selector: 'thead', $foot-selector: 'tfoot')
+{
+  #{$head-selector} tr:first-child {
+    th:first-child  { @include border-corner-radius(top, left, $radius, $clip); }
+    th:last-child   { @include border-corner-radius(top, right, $radius, $clip); }
+  }
+  #{$foot-selector} tr:last-child {
+    td:first-child  { @include border-corner-radius(bottom, left, $radius, $clip); }
+    td:last-child   { @include border-corner-radius(bottom, right, $radius, $clip); }
+  }
+}
+// For specifically setting one corner. It shouldn't be common to have to do this.
+// There's a unique case where Mozilla names their property differently.
+@mixin border-corner-radius($corner-y, $corner-x,
+                            $radius: $hlf-default-border-radius, $clip: border) {
+  $corner: $corner-y+'-'+$corner-x;
+  border-#{$corner}-radius: $radius;
+  background-clip: $clip;
+}
+// A shorthand for doing rounded corners for a side. To get the top corners:
+// `@include border-side-radius(top);`
+@mixin border-side-radius($side,
+                          $radius: $hlf-default-border-radius)
+{
+  @if $side == top or $side == left {
+    @include border-corner-radius(top, left, $radius);
+  }
+  @if $side == bottom or $side == left {
+    @include border-corner-radius(bottom, left, $radius);
+  }
+  @if $side == top or $side == right {
+    @include border-corner-radius(top, right, $radius);
+  }
+  @if $side == bottom or $side == right {
+    @include border-corner-radius(bottom, right, $radius);
+  }
+}
+
+// Misc.
+// -----
+
+@mixin linear-gradient($args...) {
+  background-image: linear-gradient($args);
+}
+
+@mixin font-face($family_name, $file_name, $path: '../fonts') {
+  @font-face {
+    font-family: '#{$family_name}';
+    src: url('#{$path}/#{$file_name}.eot');
+    src: url('#{$path}/#{$file_name}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path}/#{$file_name}.woff') format('woff'),
+         url('#{$path}/#{$file_name}.ttf') format('truetype'),
+         url('#{$path}/#{$file_name}.svg##{file_name}') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+// Animation
+// ---------
+
+// Add animation to a property. In order for multiple properties to be specified,
+// the long form of the property declaration is needed, the properties string
+// should be comma-separated. The properties should be passed in in list format:
+// `@include transition(([prop], [prop], [prop]));`. Normally, we avoid the long form
+// b/c it increases file size.
+@mixin transition($properties: all, $time: 0.3s, $easing: ease-in-out) {
+  @if length($properties) > 1 {
+    transition-property: $properties;
+    transition-duration: $time;
+    transition-timing-function: $easing;
+  } @else {
+    transition: $properties $time $easing;
+  }
+}
+%default-transition {
+  @include transition;
+}
+// A shorthand for adding an on-hover animation.
+@mixin anim-onhover($property, $value-1, $value-2, $target: '&') {
+  #{$target} {
+    @include transition($property);
+    #{$property}: $value-1;
+  }
+  &:hover {
+    #{$target} {
+      #{$property}: $value-2;
+    }
+  }
+}
+
+// Layout
+// ------
+
+// Will be redeclared once for each css file, a limitation of importing
+// everything for each scss stylesheet and then concatenating them.
+@mixin clearfix($with-ie: true) {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+  & { *zoom: 1; }
+  @if $with-ie {
+    html.ie6 & {
+      display: inline-block;
+      height: 1%;
+      display: block;
+    }
+  }
+}
+%clearfix {
+  @include clearfix;
+}
+
+// Mostly derived from HTML5 Boilerplate. It's for semantic banners that show an
+// image instead of the actual text, etc.
+@mixin replaced {
+  display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr;
+}
+
+// Generic box reset.
+@mixin reset-spacing {
+  margin: 0;
+  padding: 0;
+}
+
+// For centering a box within another box. You can center by width, or height, or
+// both. Pass `false` to defer that dimension. You can include extras for adding
+// the additional required/implied rules.
+@mixin centered($width,
+                $height: false, $extras: true)
+{
+  @if $extras {
+    display: block;
+    position: absolute;
+  }
+  @if $width != false {
+    left: 50%;
+    margin-left: -$width / 2;
+    @if $extras { width: $width; }
+  }
+  @if $height != false {
+    top: 50%;
+    margin-top: -$height / 2;
+    @if $extras { height: $height; }
+  }
+}
