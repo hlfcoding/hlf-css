@@ -1,0 +1,28 @@
+//
+// List Stand-Alone Bootstrap
+// ==========================
+// 
+// Just a simple list.
+
+/* ==========================================================================
+   List Stand-Alone Bootstrap
+   ========================================================================== */
+
+header {
+  border-bottom: 1px dotted #000;
+  font: { size: 30px; weight: bold; }
+  padding: 40px 0;
+}
+.list {
+  margin: 10px 50px;
+  nav a {
+    display: block;
+    padding: 10px 10px 14px;
+    border-bottom: 1px dotted #ccc;
+    &:hover {
+      background: #f5f5ff;
+      text-decoration: none;
+    }
+    &:last-child { border-bottom: 0; }
+  }
+}
