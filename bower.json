@@ -1,0 +1,20 @@
+{
+  "name": "hlf-css",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hlfcoding/hlf-css",
+  "authors": [
+    "Peng Wang <peng@pengxwang.com>"
+  ],
+  "description": "(S)CSS library, mainly for personal projects.",
+  "main": "dist/bootstraps/hlf.css",
+  "keywords": [
+    "scss",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "*",
+    "!dist/",
+    "!dist/*"
+  ]
+}

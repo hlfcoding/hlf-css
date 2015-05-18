@@ -1,4 +1,4 @@
-# HLF (S)CSS
+# HLF (S)CSS ![Bower Version](https://img.shields.io/bower/v/hlf-css.svg)
 
      __         __       ___
     /\ \       /\ \     / __\
@@ -7,6 +7,18 @@
       \ \ \ \ \  \ \ \  \ \ \_/
        \ \_\ \_\  \ \_\  \ \_\
         \/_/ /_/   \/_/   \/_/
+
+## Development [![devDependency Status](https://david-dm.org/hlfcoding/hlf-css/dev-status.svg)](https://david-dm.org/hlfcoding/hlf-css#info=devDependencies)
+
+```bash
+hlf-jquery> npm install
+hlf-jquery> gem install -N sass # for grunt-contrib-sass
+
+# to build
+hlf-jquery> grunt
+```
+
+Note that Grunt task options and multi-tasks are in build/.
 
 ## License
 
