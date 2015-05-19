@@ -12,9 +12,6 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON 'package.json'
 
     autoprefixer:
-      options:
-        browsers: ['last 2 versions', 'ie >= 8']
-        cascade: yes
       src: aspects.src.autoprefixer
 
     bump:
