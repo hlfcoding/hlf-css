@@ -1,4 +1,4 @@
-# HLF (S)CSS ![Bower Version](https://img.shields.io/bower/v/hlf-css.svg)
+# HLF (S)CSS ![Bower Version](https://img.shields.io/bower/v/hlf-css.svg) [![Code Climate](https://codeclimate.com/github/hlfcoding/hlf-css/badges/gpa.svg)](https://codeclimate.com/github/hlfcoding/hlf-css)
 
      __         __       ___
     /\ \       /\ \     / __\
@@ -24,7 +24,7 @@ Note that Grunt task options and multi-tasks are in build/.
 
 The MIT License (MIT)
 
-    Copyright (c) 2008-2015 Peng Wang
+    Copyright (c) 2008-2016 Peng Wang
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
