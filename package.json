@@ -1,6 +1,6 @@
 {
   "name": "hlf-css",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "(S)CSS library, mainly for personal projects. Currently private from lack of Node support.",
   "author": "Peng Wang <peng@pengxwang.com>",
   "license": "MIT",
