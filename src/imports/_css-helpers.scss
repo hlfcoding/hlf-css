@@ -8,35 +8,20 @@
 
 $hlf-default-border-radius: 5px !default;
 
-@mixin border-radius($radius: $hlf-default-border-radius, $clip: border-box) {
-  // TODO: Check if still necessary:
-  // We interpolate `$radius` for cases where it's not's just one value, but [top]
-  // [right] [bottom] [left].
-  border-radius: #{$radius};
-  background-clip: $clip;
-}
 // To get round corners on tables, the border-radius values should be added to
 // the appropriate cells. The custom selectors makes it so this can be applied
 // to a variety of tables.
-@mixin border-radius-table($radius: $hlf-default-border-radius, $clip: border,
+@mixin border-radius-table($radius: $hlf-default-border-radius,
                            $head-selector: 'thead', $foot-selector: 'tfoot')
 {
   #{$head-selector} tr:first-child {
-    th:first-child  { @include border-corner-radius(top, left, $radius, $clip); }
-    th:last-child   { @include border-corner-radius(top, right, $radius, $clip); }
+    th:first-child  { border-top-left-radius: $radius; }
+    th:last-child   { border-top-right-radius: $radius; }
   }
   #{$foot-selector} tr:last-child {
-    td:first-child  { @include border-corner-radius(bottom, left, $radius, $clip); }
-    td:last-child   { @include border-corner-radius(bottom, right, $radius, $clip); }
+    td:first-child  { border-bottom-left-radius: $radius; }
+    td:last-child   { border-bottom-right-radius: $radius; }
   }
-}
-// For specifically setting one corner. It shouldn't be common to have to do this.
-// There's a unique case where Mozilla names their property differently.
-@mixin border-corner-radius($corner-y, $corner-x,
-                            $radius: $hlf-default-border-radius, $clip: border) {
-  $corner: $corner-y+'-'+$corner-x;
-  border-#{$corner}-radius: $radius;
-  background-clip: $clip;
 }
 // A shorthand for doing rounded corners for a side. To get the top corners:
 // `@include border-side-radius(top);`
@@ -60,10 +45,6 @@ $hlf-default-border-radius: 5px !default;
 // Misc.
 // -----
 
-@mixin linear-gradient($args...) {
-  background-image: linear-gradient($args);
-}
-
 @mixin font-face($family_name, $file_name, $path: '../fonts') {
   @font-face {
     font-family: '#{$family_name}';
@@ -85,6 +66,8 @@ $hlf-default-border-radius: 5px !default;
 // should be comma-separated. The properties should be passed in in list format:
 // `@include transition(([prop], [prop], [prop]));`. Normally, we avoid the long form
 // b/c it increases file size.
+//
+// @deprecated Use stock transition api instead.
 @mixin transition($properties: all, $time: 0.3s, $easing: ease-in-out) {
   @if length($properties) > 1 {
     transition-property: $properties;
@@ -96,18 +79,6 @@ $hlf-default-border-radius: 5px !default;
 }
 %default-transition {
   @include transition;
-}
-// A shorthand for adding an on-hover animation.
-@mixin anim-onhover($property, $value-1, $value-2, $target: '&') {
-  #{$target} {
-    @include transition($property);
-    #{$property}: $value-1;
-  }
-  &:hover {
-    #{$target} {
-      #{$property}: $value-2;
-    }
-  }
 }
 
 // Layout
