@@ -9,10 +9,10 @@
 // Box Shadows
 // -----------
 
-// A preset using box-shadow that by default has no offset, where two box shadows are applied
-// uniformly, one for an inner shadow, another for an outer "edge", to create the
-// appearance of a bevel. You can provide inverted colors for the "contour" look,
-// where it's bumpy, not caved in.
+// A preset using box-shadow that by default has no offset, where two box
+// shadows are applied uniformly, one for an inner shadow, another for an outer
+// "edge", to create the appearance of a bevel. You can provide inverted colors
+// for the "contour" look, where it's bumpy, not caved in.
 @mixin simple-bevel($shade, $light,
                     $shade-blur: 1px, $light-blur: 0,
                     $shade-size: 0, $light-size: 1px,
