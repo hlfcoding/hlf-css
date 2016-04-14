@@ -68,6 +68,16 @@
   }
 }
 
+// Appends '...' to the end by default. Requires some sort of set width.
+@mixin truncated-text ($overflow: ellipsis) {
+  text-overflow: $overflow;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+%default-truncated-text {
+  @include truncated-text;
+}
+
 // Full Styles
 // -----------
 
