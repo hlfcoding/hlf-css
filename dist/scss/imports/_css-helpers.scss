@@ -35,7 +35,7 @@ $hlf-default-border-radius: 5px !default;
     border-bottom-left-radius: $radius;
   }
   @if $side == top or $side == right {
-    border-bottom-left-radius: $radius;
+    border-top-right-radius: $radius;
   }
   @if $side == bottom or $side == right {
     border-bottom-right-radius: $radius;
