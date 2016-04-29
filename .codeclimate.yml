@@ -11,6 +11,6 @@ ratings:
   - "**.scss"
   - "**.coffee"
 exclude_paths:
+- "**/legacy/**/*"
 - "dist/**/*"
-- "legacy/**/*"
 - "lib/**/*"
