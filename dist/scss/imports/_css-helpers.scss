@@ -15,12 +15,13 @@ $hlf-default-border-radius: 5px !default;
                            $head-selector: 'thead', $foot-selector: 'tfoot')
 {
   #{$head-selector} tr:first-child {
-    th:first-child  { border-top-left-radius: $radius; }
-    th:last-child   { border-top-right-radius: $radius; }
+    th:first-child { border-top-left-radius: $radius; }
+    th:last-child { border-top-right-radius: $radius; }
   }
+
   #{$foot-selector} tr:last-child {
-    td:first-child  { border-bottom-left-radius: $radius; }
-    td:last-child   { border-bottom-right-radius: $radius; }
+    td:first-child { border-bottom-left-radius: $radius; }
+    td:last-child { border-bottom-right-radius: $radius; }
   }
 }
 // A shorthand for doing rounded corners for a side. To get the top corners:
@@ -45,14 +46,14 @@ $hlf-default-border-radius: 5px !default;
 // Misc.
 // -----
 
-@mixin font-face($family_name, $file_name, $path: '../fonts') {
+@mixin font-face($family-name, $file-name, $path: '../fonts') {
   @font-face {
-    font-family: '#{$family_name}';
-    src: url('#{$path}/#{$file_name}.eot');
-    src: url('#{$path}/#{$file_name}.eot?#iefix') format('embedded-opentype'),
-         url('#{$path}/#{$file_name}.woff') format('woff'),
-         url('#{$path}/#{$file_name}.ttf') format('truetype'),
-         url('#{$path}/#{$file_name}.svg##{file_name}') format('svg');
+    font-family: '#{$family-name}';
+    src: url('#{$path}/#{$file-name}.eot');
+    src: url('#{$path}/#{$file-name}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path}/#{$file-name}.woff') format('woff'),
+         url('#{$path}/#{$file-name}.ttf') format('truetype'),
+         url('#{$path}/#{$file-name}.svg##{file-name}') format('svg');
     font-weight: normal;
     font-style: normal;
   }
@@ -68,15 +69,16 @@ $hlf-default-border-radius: 5px !default;
 // b/c it increases file size.
 //
 // @deprecated Use stock transition api instead.
-@mixin transition($properties: all, $time: 0.3s, $easing: ease-in-out) {
+@mixin transition($properties: all, $time: .3s, $easing: ease-in-out) {
   @if length($properties) > 1 {
-    transition-property: $properties;
     transition-duration: $time;
+    transition-property: $properties;
     transition-timing-function: $easing;
   } @else {
     transition: $properties $time $easing;
   }
 }
+
 %default-transition {
   @include transition;
 }
@@ -87,9 +89,11 @@ $hlf-default-border-radius: 5px !default;
 // Will be redeclared once for each css file, a limitation of importing
 // everything for each scss stylesheet and then concatenating them.
 @mixin clearfix($with-ie: true) {
-  &:before, &:after { content: " "; display: table; }
-  &:after { clear: both; }
-  & { *zoom: 1; }
+  &::before,
+  &::after { content: ' '; display: table; }
+  &::after { clear: both; }
+  *zoom: 1;
+
   @if $with-ie {
     html.ie6 & {
       display: inline-block;
@@ -98,6 +102,7 @@ $hlf-default-border-radius: 5px !default;
     }
   }
 }
+
 %clearfix {
   @include clearfix;
 }
@@ -130,8 +135,8 @@ $hlf-default-border-radius: 5px !default;
     @if $extras { width: $width; }
   }
   @if $height != false {
-    top: 50%;
     margin-top: -$height / 2;
+    top: 50%;
     @if $extras { height: $height; }
   }
 }
