@@ -20,9 +20,7 @@ $_weight: '#html';
 @import '../../lib/modified/html5-boilerplate/base';
 @import '../../lib/modified/normalize';
 
-/* ==========================================================================
-   Bootstrap additions
-   ========================================================================== */
+// Bootstrap additions.
 
 @if $_context == master {
   .inline-block { display: inline-block; }
