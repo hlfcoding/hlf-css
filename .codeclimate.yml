@@ -12,4 +12,5 @@ ratings:
   - "**.coffee"
 exclude_paths:
 - "dist/**/*"
+- "legacy/**/*"
 - "lib/**/*"
