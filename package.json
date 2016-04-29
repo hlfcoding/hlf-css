@@ -1,6 +1,6 @@
 {
   "name": "hlf-css",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "(S)CSS library, mainly for personal projects.",
   "main": "src/bootstraps/hlf.scss",
   "keywords": ["css", "scss"],
